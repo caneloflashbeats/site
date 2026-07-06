@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canelo Flash | Trap, Reggaetón & Hip-Hop Beats</title>
+<meta name="description" content="Canelo Flash makes trap, reggaetón, hip-hop and boom bap beats built to hit different. Listen to the catalog and grab a license on BeatStars.">
+<meta name="keywords" content="trap beats, reggaeton beats, hip hop beats, boom bap beats, buy beats, beatstars, canelo flash">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://caneloflashbeats.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Canelo Flash | Trap, Reggaetón & Hip-Hop Beats">
+<meta property="og:description" content="Trap, reggaetón, hip-hop and boom bap beats built to hit different. Listen and buy on BeatStars.">
+<meta property="og:image" content="logo.png">
+<meta property="og:url" content="https://caneloflashbeats.com/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Canelo Flash | Trap, Reggaetón & Hip-Hop Beats">
+<meta name="twitter:description" content="Trap, reggaetón, hip-hop and boom bap beats built to hit different. Listen and buy on BeatStars.">
+<meta name="twitter:image" content="logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "Canelo Flash",
+  "genre": ["Trap", "Reggaeton", "Hip-Hop", "Boom Bap"],
+  "url": "https://caneloflashbeats.com/",
+  "image": "logo.png",
+  "sameAs": [
+    "https://www.instagram.com/canelo_flash/",
+    "https://soundcloud.com/canelo-flash",
+    "https://www.youtube.com/@Caneloflashbeats",
+    "https://www.beatstars.com/caneloflashbeats"
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-2:#141414;
+    --bg-3:#1b1b1b;
+    --gold:#D4AF37;
+    --gold-dim:#7d6a24;
+    --red:#E8232B;
+    --bone:#F5F1EA;
+    --gray:#8f8f8b;
+    --line:#232323;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--bone);
+    font-family:Arial, Helvetica, sans-serif;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+
+  .tag{
+    font-family:'Permanent Marker', cursive;
+    color:var(--red);
+    font-weight:400;
+    letter-spacing:0.5px;
+  }
+
+  .noise{
+    position:fixed; inset:0; pointer-events:none; z-index:1; opacity:0.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:20;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:linear-gradient(to bottom, rgba(10,10,10,0.96), rgba(10,10,10,0));
+  }
+  header .brand{display:flex; align-items:center; gap:10px;}
+  header img.mark{height:32px;}
+  header .word{font-size:15px; font-weight:bold; letter-spacing:1px;}
+  header .word span{color:var(--red);}
+  nav{display:flex; gap:30px; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; font-weight:bold;}
+  nav a{color:var(--gray); position:relative; padding-bottom:4px;}
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--red);
+    transition:width .25s ease;
+  }
+  nav a:hover{color:var(--bone);}
+  nav a:hover::after{width:100%;}
+
+  /* ticker */
+  .ticker-wrap{
+    position:relative; overflow:hidden; white-space:nowrap; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    background:var(--bg-2); padding:10px 0; z-index:5;
+  }
+  .ticker{display:inline-block; padding-left:100%; animation:scroll-left 22s linear infinite;}
+  .ticker span{font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--gray); margin-right:40px; font-weight:bold;}
+  .ticker span b{color:var(--gold); font-weight:bold;}
+  @keyframes scroll-left{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+  @media (prefers-reduced-motion: reduce){ .ticker{animation:none; padding-left:0;} }
+
+  /* HERO */
+  .hero{
+    min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:130px 6vw 60px; position:relative;
+  }
+  .hero .spray{
+    position:absolute; width:900px; max-width:150vw; height:900px; top:48%; left:50%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(232,35,43,0.10) 0%, rgba(212,175,55,0.05) 35%, transparent 70%);
+    z-index:0; pointer-events:none;
+  }
+  .hero img.logo{width:min(560px, 82vw); position:relative; z-index:1; filter:drop-shadow(0 0 40px rgba(212,175,55,0.15));}
+  .hero h1{
+    font-size:clamp(26px, 4vw, 42px); font-weight:bold; margin-top:24px; position:relative; z-index:1;
+    line-height:1.25;
+  }
+  .hero p.sub{
+    font-size:15px; color:var(--gray); margin-top:14px; max-width:480px; position:relative; z-index:1;
+  }
+  .cta-row{display:flex; gap:16px; margin-top:36px; flex-wrap:wrap; justify-content:center; position:relative; z-index:1;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 28px; border-radius:4px; font-weight:bold; font-size:13px;
+    letter-spacing:1px; text-transform:uppercase; transition:transform .15s, box-shadow .15s, background .15s;
+    border:2px solid transparent;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--red); color:var(--bone);}
+  .btn-primary:hover{box-shadow:0 10px 26px rgba(232,35,43,0.35);}
+  .btn-ghost{border-color:var(--gold-dim); color:var(--gold);}
+  .btn-ghost:hover{border-color:var(--gold); background:rgba(212,175,55,0.06);}
+
+  .scroll-cue{
+    position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+    font-size:10px; letter-spacing:3px; color:var(--gray); text-transform:uppercase;
+    animation:bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,6px);}}
+  @media (prefers-reduced-motion: reduce){ .scroll-cue{animation:none;} }
+
+  section{padding:100px 6vw; position:relative; z-index:1;}
+  .eyebrow{
+    font-size:11px; letter-spacing:3px; color:var(--red); text-transform:uppercase;
+    margin-bottom:12px; font-weight:bold;
+  }
+  h2{font-size:clamp(24px, 3.4vw, 36px); font-weight:bold; margin-bottom:16px; line-height:1.2;}
+  .section-intro{max-width:520px; color:var(--gray); font-size:14px; line-height:1.7; margin-bottom:50px;}
+
+  /* BEATS grid: 3 across, stacked in rows */
+  .beats-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
+  .beat-card{
+    background:var(--bg-2); border:1px solid var(--line); border-radius:8px; overflow:hidden;
+    transition:border-color .2s, transform .2s;
+  }
+  .beat-card:hover{border-color:var(--gold-dim); transform:translateY(-4px);}
+  .beat-card iframe{width:100%; height:166px; display:block; border:none;}
+  .beat-card .meta{padding:14px 16px; display:flex; justify-content:space-between; align-items:center;}
+  .beat-card .meta p{font-size:12px; color:var(--gray); letter-spacing:0.5px; font-weight:bold; text-transform:uppercase;}
+  .beat-card .meta .num{font-size:11px; color:var(--gold-dim); font-weight:bold;}
+
+  .bolt-divider{display:flex; align-items:center; justify-content:center; gap:14px; margin:20px 0 0;}
+  .bolt-divider .line{height:1px; width:60px; background:linear-gradient(to right, transparent, var(--gold-dim));}
+  .bolt-divider .line.r{background:linear-gradient(to left, transparent, var(--gold-dim));}
+  .bolt-divider svg{width:16px; height:22px;}
+
+  .genre-row{display:flex; flex-wrap:wrap; gap:12px;}
+  .genre-pill{
+    border:1px solid var(--line); padding:10px 20px; border-radius:100px;
+    font-size:12px; letter-spacing:1px; color:var(--bone); font-weight:bold; text-transform:uppercase;
+    transition:border-color .2s, background .2s;
+  }
+  .genre-pill:hover{border-color:var(--gold-dim); background:var(--bg-2);}
+
+  .band{
+    background:var(--bg-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); text-align:center;
+  }
+  .band p{color:var(--gray); font-size:14px; margin-bottom:30px;}
+
+  .footer-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:start;}
+  .social-list{display:flex; flex-direction:column; gap:0; margin-top:20px;}
+  .social-link{
+    display:flex; align-items:center; gap:14px; font-size:14px; font-weight:bold;
+    color:var(--bone); padding:14px 0; border-bottom:1px solid var(--line);
+    transition:color .2s, padding-left .2s; text-transform:uppercase; letter-spacing:0.5px;
+  }
+  .social-link:hover{color:var(--gold); padding-left:8px;}
+  .social-link svg{width:18px; height:18px; flex-shrink:0; color:var(--gray);}
+  .social-link:hover svg{color:var(--red);}
+
+  .contact-box{background:var(--bg-2); border:1px solid var(--line); border-radius:10px; padding:32px;}
+  .contact-box p{color:var(--gray); font-size:13px; margin-bottom:22px; line-height:1.6;}
+
+  footer.site-footer{
+    padding:34px 6vw; display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid var(--line); font-size:11px; color:var(--gray); flex-wrap:wrap; gap:12px;
+  }
+  footer.site-footer img{height:20px; opacity:0.7;}
+
+  @media(max-width:860px){
+    nav{display:none;}
+    .beats-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr; gap:40px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="noise" aria-hidden="true"></div>
+
+<header>
+  <div class="brand">
+    <img class="mark" src="logo.png" alt="Canelo Flash logo">
+    <span class="word">CANELO <span>FLASH</span></span>
+  </div>
+  <nav>
+    <a href="#beats">Beats</a>
+    <a href="#genres">Genres</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="spray" aria-hidden="true"></div>
+  <img class="logo" src="logo.png" alt="Canelo Flash — trap, reggaeton, hip-hop and boom bap beats">
+  <h1>Beats built <span class="tag">different.</span></h1>
+  <p class="sub">Trap. Reggaetón. Hip-hop. Boom bap. Pick your lane, grab the license, drop the track.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://www.beatstars.com/caneloflashbeats" target="_blank" rel="noopener">
+      Shop on BeatStars
+    </a>
+    <a class="btn btn-ghost" href="#beats">Hear the catalog</a>
+  </div>
+  <span class="scroll-cue">Scroll ↓</span>
+</section>
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <span>TRAP</span><span><b>·</b></span><span>REGGAETÓN</span><span><b>·</b></span><span>HIP-HOP</span><span><b>·</b></span><span>BOOM BAP</span><span><b>·</b></span>
+    <span>TRAP</span><span><b>·</b></span><span>REGGAETÓN</span><span><b>·</b></span><span>HIP-HOP</span><span><b>·</b></span><span>BOOM BAP</span><span><b>·</b></span>
+  </div>
+</div>
+
+<section id="beats">
+  <p class="eyebrow reveal">Catalog</p>
+  <h2 class="reveal">Fresh off the <span class="tag">block.</span></h2>
+  <p class="section-intro reveal">A taste of what's waiting on BeatStars. Non-exclusive and exclusive licenses, instant delivery, no middleman.</p>
+
+  <div class="beats-grid">
+    <div class="beat-card reveal">
+      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Trap beat sample"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash&color=%23e8232b&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false"></iframe>
+      <div class="meta"><p>Trap</p><span class="num">01</span></div>
+    </div>
+    <div class="beat-card reveal">
+      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Reggaeton beat sample"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash&color=%23e8232b&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false"></iframe>
+      <div class="meta"><p>Reggaetón</p><span class="num">02</span></div>
+    </div>
+    <div class="beat-card reveal">
+      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Hip-hop beat sample"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash&color=%23e8232b&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false"></iframe>
+      <div class="meta"><p>Hip-hop</p><span class="num">03</span></div>
+    </div>
+    <div class="beat-card reveal">
+      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Boom bap beat sample"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash&color=%23e8232b&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false"></iframe>
+      <div class="meta"><p>Boom bap</p><span class="num">04</span></div>
+    </div>
+    <div class="beat-card reveal">
+      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Trap beat sample two"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash&color=%23e8232b&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false"></iframe>
+      <div class="meta"><p>Trap</p><span class="num">05</span></div>
+    </div>
+    <div class="beat-card reveal">
+      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Reggaeton beat sample two"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash&color=%23e8232b&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false"></iframe>
+      <div class="meta"><p>Reggaetón</p><span class="num">06</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="bolt-divider" aria-hidden="true">
+  <span class="line"></span>
+  <svg viewBox="0 0 20 30" fill="none"><path d="M12 2 L4 16 H10 L8 28 L18 12 H11 L12 2Z" fill="#E8232B"/></svg>
+  <span class="line r"></span>
+</div>
+
+<section id="genres">
+  <p class="eyebrow reveal">Sound</p>
+  <h2 class="reveal">One producer, <span class="tag">four lanes.</span></h2>
+  <p class="section-intro reveal">Every beat is built to fit the pocket of the genre it's made for — no generic loops recycled across styles.</p>
+  <div class="genre-row reveal">
+    <span class="genre-pill">Trap</span>
+    <span class="genre-pill">Reggaetón</span>
+    <span class="genre-pill">Hip-hop</span>
+    <span class="genre-pill">Boom bap</span>
+  </div>
+</section>
+
+<section class="band reveal">
+  <p class="eyebrow">BeatStars</p>
+  <h2>All killer, <span class="tag">no filler.</span></h2>
+  <p>Full catalog, licensing tiers, and instant download live on BeatStars.</p>
+  <a class="btn btn-primary" href="https://www.beatstars.com/caneloflashbeats" target="_blank" rel="noopener">
+    Go to the store
+  </a>
+</section>
+
+<section id="contact">
+  <div class="footer-grid">
+    <div class="reveal">
+      <p class="eyebrow">Follow</p>
+      <h2>Find me <span class="tag">everywhere.</span></h2>
+      <div class="social-list">
+        <a class="social-link" href="https://www.instagram.com/canelo_flash/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          Instagram
+        </a>
+        <a class="social-link" href="https://soundcloud.com/canelo-flash" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 15h1v3H2zM5 12h1v6H5zM8 10h1v8H8zM11 9h1v9h-1zM14 11h1v7h-1zM17 8c2.5 0 4.5 2 4.5 4.5S19.5 17 17 17H9v-9h8z"/></svg>
+          SoundCloud
+        </a>
+        <a class="social-link" href="https://www.youtube.com/@Caneloflashbeats" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+          YouTube
+        </a>
+        <a class="social-link" href="https://www.beatstars.com/caneloflashbeats" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 5 14h6l-1 8 8-12h-6z"/></svg>
+          BeatStars
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-box reveal">
+      <p class="eyebrow">Custom work</p>
+      <h2 style="font-size:22px;">Need a <span class="tag">custom beat?</span></h2>
+      <p>Reach out directly and let's line up the details.</p>
+      <a class="btn btn-primary" href="mailto:caneloflashbeats@gmail.com" style="width:100%; justify-content:center;">
+        caneloflashbeats@gmail.com
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <img src="logo.png" alt="Canelo Flash logo">
+  <span>© 2026 Canelo Flash. All beats available on BeatStars.</span>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
