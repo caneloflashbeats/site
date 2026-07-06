@@ -124,7 +124,30 @@
     background:radial-gradient(circle, rgba(232,35,43,0.10) 0%, rgba(212,175,55,0.05) 35%, transparent 70%);
     z-index:0; pointer-events:none;
   }
-  .hero img.logo{width:min(560px, 82vw); position:relative; z-index:1; filter:drop-shadow(0 0 40px rgba(212,175,55,0.15));}
+  .logo-wrap{position:relative; display:inline-block; z-index:1;}
+  .hero img.logo{
+    width:min(400px, 66vw); position:relative; z-index:1;
+    filter:drop-shadow(0 0 40px rgba(212,175,55,0.15)) blur(6px);
+    opacity:0; transform:scale(0.9);
+    transition:opacity .9s ease, filter .9s ease, transform .9s ease;
+  }
+  .hero img.logo.show{
+    opacity:1; transform:scale(1);
+    filter:drop-shadow(0 0 40px rgba(212,175,55,0.15)) blur(0);
+  }
+  .spray-dot{
+    position:absolute; border-radius:50%; pointer-events:none; opacity:0;
+    animation:sprayDot .55s ease-out forwards;
+  }
+  @keyframes sprayDot{
+    0%{opacity:0; transform:scale(0);}
+    35%{opacity:0.9; transform:scale(1);}
+    100%{opacity:0; transform:scale(1.7);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero img.logo{opacity:1; transform:none; filter:drop-shadow(0 0 40px rgba(212,175,55,0.15));}
+    .spray-dot{display:none;}
+  }
   .hero h1{
     font-size:clamp(26px, 4vw, 42px); font-weight:bold; margin-top:24px; position:relative; z-index:1;
     line-height:1.25;
@@ -238,7 +261,9 @@
 
 <section class="hero">
   <div class="spray" aria-hidden="true"></div>
-  <img class="logo" src="logo.png" alt="Canelo Flash — trap, reggaeton, hip-hop and boom bap beats">
+  <div class="logo-wrap" id="logoWrap">
+    <img class="logo" id="heroLogo" src="logo.png" alt="Canelo Flash — trap, reggaeton, hip-hop and boom bap beats">
+  </div>
   <h1>Beats built <span class="tag">different.</span></h1>
   <p class="sub">Trap. Reggaetón. Hip-hop. Boom bap. Pick your lane, grab the license, drop the track.</p>
   <div class="cta-row">
@@ -367,6 +392,33 @@
 </footer>
 
 <script>
+  // spray-paint reveal for the hero logo
+  (function(){
+    const wrap = document.getElementById('logoWrap');
+    const logo = document.getElementById('heroLogo');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduced || !wrap || !logo){ if(logo) logo.classList.add('show'); }
+    else{
+      const colors = ['#E8232B','#D4AF37','#F5F1EA'];
+      const rect = { w: wrap.getBoundingClientRect().width || 400, h: wrap.getBoundingClientRect().height || 240 };
+      const dotCount = 46;
+      for(let i=0;i<dotCount;i++){
+        const dot = document.createElement('span');
+        const size = 3 + Math.random()*9;
+        dot.className = 'spray-dot';
+        dot.style.width = size+'px';
+        dot.style.height = size+'px';
+        dot.style.left = (Math.random()*rect.w)+'px';
+        dot.style.top = (Math.random()*rect.h)+'px';
+        dot.style.background = colors[Math.floor(Math.random()*colors.length)];
+        dot.style.animationDelay = (Math.random()*0.7)+'s';
+        wrap.appendChild(dot);
+        setTimeout(()=> dot.remove(), 1500);
+      }
+      setTimeout(()=> logo.classList.add('show'), 550);
+    }
+  })();
+
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
