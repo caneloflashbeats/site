@@ -106,6 +106,31 @@
   nav a:hover{color:var(--bone);}
   nav a:hover::after{width:100%;}
 
+  .nav-dropdown{position:relative;}
+  .dropdown-toggle{
+    background:none; border:none; font-family:Arial, Helvetica, sans-serif;
+    color:var(--gray); font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+    font-weight:bold; cursor:pointer; display:flex; align-items:center; gap:5px;
+    padding-bottom:4px; transition:color .2s;
+  }
+  .dropdown-toggle:hover{color:var(--bone);}
+  .dropdown-toggle svg{transition:transform .2s ease;}
+  .nav-dropdown.open .dropdown-toggle svg{transform:rotate(180deg);}
+  .dropdown-menu{
+    position:absolute; top:calc(100% + 14px); left:50%; transform:translateX(-50%) translateY(-8px);
+    background:var(--bg-2); border:1px solid var(--line); border-radius:8px;
+    min-width:150px; padding:8px; opacity:0; pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+    box-shadow:0 12px 30px rgba(0,0,0,0.4);
+  }
+  .nav-dropdown.open .dropdown-menu{opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0);}
+  .dropdown-menu a{
+    display:block; padding:9px 12px; font-size:12px; letter-spacing:1px; text-transform:uppercase;
+    font-weight:bold; color:var(--bone); border-radius:5px; transition:background .15s, color .15s;
+  }
+  .dropdown-menu a:hover{background:rgba(232,35,43,0.12); color:var(--gold);}
+  .dropdown-menu a::after{display:none;}
+
   /* ticker */
   .ticker-wrap{
     position:relative; overflow:hidden; white-space:nowrap; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
@@ -302,7 +327,18 @@
   </div>
   <nav>
     <a href="#beats">Beats</a>
-    <a href="#genres">Genres</a>
+    <div class="nav-dropdown">
+      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+        Genres
+        <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="dropdown-menu">
+        <a href="#beats" data-filter="trap">Trap</a>
+        <a href="#beats" data-filter="reggaeton">Reggaetón</a>
+        <a href="#beats" data-filter="hiphop">Hip-hop</a>
+        <a href="#beats" data-filter="afrobeat">Afrobeat</a>
+      </div>
+    </div>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -348,7 +384,7 @@
 <section id="beats">
   <p class="eyebrow reveal">Catalog</p>
   <h2 class="reveal">Fresh off the <span class="tag">block.</span></h2>
-  <p class="section-intro reveal">A taste of what's waiting on BeatStars. Non-exclusive and exclusive licenses, instant delivery, no middleman.</p>
+  <p class="section-intro reveal">Trap, reggaetón, hip-hop, boom bap — whatever I'm feeling that day ends up in the beat.</p>
 
   <div class="filter-row reveal" role="group" aria-label="Filter beats by genre">
     <button class="filter-pill active" data-filter="all">All</button>
@@ -418,18 +454,6 @@
   <span class="line r"></span>
 </div>
 
-<section id="genres">
-  <p class="eyebrow reveal">Sound</p>
-  <h2 class="reveal">Trap, reggaetón, hip-hop, <span class="tag">boom bap</span> — depends on the day.</h2>
-  <p class="section-intro reveal">Whatever I'm feeling that day ends up in the beat. That's really the whole process.</p>
-  <div class="genre-row reveal">
-    <span class="genre-pill">Trap</span>
-    <span class="genre-pill">Reggaetón</span>
-    <span class="genre-pill">Hip-hop</span>
-    <span class="genre-pill">Boom bap</span>
-  </div>
-</section>
-
 <section class="band reveal">
   <p class="eyebrow">BeatStars</p>
   <h2>All killer, <span class="tag">no filler.</span></h2>
@@ -487,6 +511,35 @@
 </footer>
 
 <script>
+  // genres dropdown in nav
+  (function(){
+    const dropdown = document.querySelector('.nav-dropdown');
+    const toggle = document.querySelector('.dropdown-toggle');
+    const menuLinks = document.querySelectorAll('.dropdown-menu a');
+    if(!dropdown || !toggle) return;
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+    document.addEventListener('click', () => {
+      dropdown.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+
+    menuLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filter = link.dataset.filter;
+        const targetPill = document.querySelector('.filter-pill[data-filter="'+filter+'"]');
+        if(targetPill) targetPill.click();
+        document.getElementById('beats').scrollIntoView({behavior:'smooth'});
+        dropdown.classList.remove('open');
+      });
+    });
+  })();
+
   // genre filter
   (function(){
     const pills = document.querySelectorAll('.filter-pill');
