@@ -261,6 +261,42 @@
   }
 
   .beats-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
+
+  .steps-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:22px;}
+  .step-card{
+    background:var(--bg-2); border:1px solid var(--line); border-radius:10px;
+    padding:28px 24px; position:relative; transition:border-color .2s, transform .2s;
+  }
+  .step-card:hover{border-color:var(--gold-dim); transform:translateY(-4px);}
+  .step-num{
+    position:absolute; top:20px; right:22px; font-size:12px; font-weight:bold;
+    color:var(--gold-dim); letter-spacing:1px;
+  }
+  .step-card svg{width:30px; height:30px; color:var(--red); margin-bottom:18px;}
+  .step-card h3{font-size:17px; font-weight:bold; margin-bottom:10px;}
+  .step-card p{font-size:13px; color:var(--gray); line-height:1.6;}
+  @media(max-width:860px){
+    .steps-grid{grid-template-columns:1fr;}
+  }
+
+  .about-grid{display:grid; grid-template-columns:280px 1fr; gap:52px; align-items:center;}
+  .about-photo-wrap{position:relative;}
+  .about-photo-wrap::before{
+    content:''; position:absolute; top:18px; left:18px; width:100%; height:100%;
+    background:var(--red); z-index:0;
+    clip-path:polygon(24px 0, 100% 0, calc(100% - 24px) 100%, 0 100%);
+  }
+  .about-photo{
+    position:relative; z-index:1; width:100%; aspect-ratio:3/4; object-fit:cover;
+    clip-path:polygon(24px 0, 100% 0, calc(100% - 24px) 100%, 0 100%);
+    filter:grayscale(0.15) contrast(1.05);
+  }
+  .about-text .eyebrow{margin-bottom:12px;}
+  .about-body{font-size:15px; color:var(--gray); line-height:1.8; max-width:520px;}
+  @media(max-width:860px){
+    .about-grid{grid-template-columns:1fr; gap:34px;}
+    .about-photo-wrap{max-width:240px; margin:0 auto;}
+  }
   .beat-card{
     background:var(--bg-2); border:1px solid var(--line); border-radius:8px; overflow:hidden;
     transition:border-color .2s, transform .2s;
@@ -313,6 +349,52 @@
     nav{display:none;}
     .beats-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr; gap:40px;}
+    .hamburger{display:flex;}
+  }
+
+  .hamburger{
+    display:none; background:none; border:none; color:var(--bone);
+    cursor:pointer; padding:6px; align-items:center; justify-content:center;
+  }
+
+  .mobile-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:29;
+    opacity:0; pointer-events:none; transition:opacity .3s ease;
+  }
+  .mobile-overlay.open{opacity:1; pointer-events:auto;}
+
+  .mobile-nav{
+    position:fixed; top:0; right:-85%; width:78%; max-width:320px; height:100vh;
+    background:var(--bg-2); z-index:30; transition:right .32s ease;
+    padding:90px 26px 26px; display:flex; flex-direction:column;
+    box-shadow:-14px 0 40px rgba(0,0,0,0.5); overflow-y:auto;
+  }
+  .mobile-nav.open{right:0;}
+  .mobile-close{
+    position:absolute; top:24px; right:22px; background:none; border:none;
+    color:var(--bone); cursor:pointer; padding:6px;
+  }
+  .mobile-link{
+    color:var(--bone); font-size:14px; font-weight:bold; letter-spacing:1px;
+    text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--line);
+  }
+  .mobile-subhead{
+    color:var(--gold-dim); font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    font-weight:bold; margin-top:16px; margin-bottom:2px;
+  }
+  .mobile-link.mobile-sub{
+    padding:11px 0 11px 14px; font-size:13px; color:var(--gray); border-bottom:none;
+  }
+  .mobile-link.mobile-sub:hover{color:var(--gold);}
+
+  .floating-cta{
+    position:fixed; bottom:22px; right:22px; z-index:22;
+    opacity:0; transform:translateY(16px) scale(0.94); pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease; padding:13px 24px 13px 20px;
+  }
+  .floating-cta.show{opacity:1; transform:translateY(0) scale(1); pointer-events:auto;}
+  @media(max-width:600px){
+    .floating-cta{left:16px; right:16px; bottom:16px; justify-content:center;}
   }
 </style>
 </head>
@@ -341,7 +423,29 @@
     </div>
     <a href="#contact">Contact</a>
   </nav>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
 </header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileCloseBtn" aria-label="Close menu">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+  </button>
+  <a href="#beats" class="mobile-link">Beats</a>
+  <p class="mobile-subhead">Genres</p>
+  <a href="#beats" class="mobile-link mobile-sub" data-filter="trap">Trap</a>
+  <a href="#beats" class="mobile-link mobile-sub" data-filter="reggaeton">Reggaetón</a>
+  <a href="#beats" class="mobile-link mobile-sub" data-filter="hiphop">Hip-hop</a>
+  <a href="#beats" class="mobile-link mobile-sub" data-filter="afrobeat">Afrobeat</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="https://www.beatstars.com/caneloflashbeats" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:20px; justify-content:center;">
+    <svg viewBox="0 0 24 24"><path d="M13 2 L4 14 H11 L9 22 L20 9 H12 L13 2Z"/></svg>
+    Shop on BeatStars
+    <span class="shine"></span>
+  </a>
+</nav>
 
 <main>
 
@@ -381,6 +485,46 @@
   </div>
 </div>
 
+<section id="how">
+  <p class="eyebrow reveal">Process</p>
+  <h2 class="reveal">Three steps. <span class="tag">That's it.</span></h2>
+  <p class="section-intro reveal">No account needed to browse, no back-and-forth to buy.</p>
+
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <span class="step-num">01</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg>
+      <h3>Listen</h3>
+      <p>Preview any beat right here on the page, no account or login needed.</p>
+    </div>
+    <div class="step-card reveal">
+      <span class="step-num">02</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.59 13.41L11 3.83A2 2 0 009.59 3.24H4a1 1 0 00-1 1v5.59a2 2 0 00.59 1.41l9.58 9.58a2 2 0 002.83 0l4.59-4.59a2 2 0 000-2.83z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+      <h3>Pick a license</h3>
+      <p>Choose non-exclusive or exclusive on BeatStars, whatever fits the budget.</p>
+    </div>
+    <div class="step-card reveal">
+      <span class="step-num">03</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <h3>Download instantly</h3>
+      <p>Files land in your inbox the second checkout goes through.</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-photo-wrap reveal">
+      <img class="about-photo" src="profile.jpg" alt="Canelo Flash, music producer">
+    </div>
+    <div class="about-text reveal">
+      <p class="eyebrow">Who's behind it</p>
+      <h2>Colombian born. <span class="tag">Sound obsessed.</span></h2>
+      <p class="about-body">I'm 27. Grew up in Bogotá, spent five years in New York, and music followed me through all of it. I make beats because I genuinely enjoy the process, not because I'm chasing a trend. Trap, reggaetón, hip-hop, boom bap — whatever sound I'm into that week is what comes out.</p>
+    </div>
+  </div>
+</section>
+
 <section id="beats">
   <p class="eyebrow reveal">Catalog</p>
   <h2 class="reveal">Fresh off the <span class="tag">block.</span></h2>
@@ -396,52 +540,52 @@
 
   <div class="beats-grid">
     <div class="beat-card reveal" data-genre="hiphop">
-      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Muffin Beat"
+      <iframe scrolling="no" frameborder="no" allow="autoplay" loading="lazy" title="Muffin Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/muffin-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
       <div class="meta"><p>Muffin Beat<span class="genre-tag">Hip-hop</span></p><span class="num">01</span></div>
     </div>
     <div class="beat-card reveal" data-genre="afrobeat">
-      <iframe scrolling="no" frameborder="no" allow="autoplay" title="De Playita"
+      <iframe scrolling="no" frameborder="no" allow="autoplay" loading="lazy" title="De Playita"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/de-playita&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
       <div class="meta"><p>De Playita<span class="genre-tag">Afrobeat</span></p><span class="num">02</span></div>
     </div>
     <div class="beat-card reveal" data-genre="trap">
-      <iframe scrolling="no" frameborder="no" allow="autoplay" title="1999 Beat"
+      <iframe scrolling="no" frameborder="no" allow="autoplay" loading="lazy" title="1999 Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/1999-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
       <div class="meta"><p>1999 Beat<span class="genre-tag">Trap</span></p><span class="num">03</span></div>
     </div>
     <div class="beat-card reveal" data-genre="hiphop">
-      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Kintsugi Beat"
+      <iframe scrolling="no" frameborder="no" allow="autoplay" loading="lazy" title="Kintsugi Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/kintsugi-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
       <div class="meta"><p>Kintsugi Beat<span class="genre-tag">Hip-hop</span></p><span class="num">04</span></div>
     </div>
     <div class="beat-card reveal" data-genre="reggaeton">
-      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Demencia Beat"
+      <iframe scrolling="no" frameborder="no" allow="autoplay" loading="lazy" title="Demencia Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/demenciabeat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
       <div class="meta"><p>Demencia Beat<span class="genre-tag">Reggaetón</span></p><span class="num">05</span></div>
     </div>
     <div class="beat-card reveal" data-genre="hiphop">
-      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Intrépido Beat"
+      <iframe scrolling="no" frameborder="no" allow="autoplay" loading="lazy" title="Intrépido Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/intrepido-beat-canelo-flash&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
       <div class="meta"><p>Intrépido Beat<span class="genre-tag">Hip-hop</span></p><span class="num">06</span></div>
     </div>
     <div class="beat-card reveal" data-genre="reggaeton">
-      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Nostalgia Beat"
+      <iframe scrolling="no" frameborder="no" allow="autoplay" loading="lazy" title="Nostalgia Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/nostalgia-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
       <div class="meta"><p>Nostalgia Beat<span class="genre-tag">Reggaetón</span></p><span class="num">07</span></div>
     </div>
     <div class="beat-card reveal" data-genre="trap">
-      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Kao Beat"
+      <iframe scrolling="no" frameborder="no" allow="autoplay" loading="lazy" title="Kao Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/kao-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
       <div class="meta"><p>Kao Beat<span class="genre-tag">Trap</span></p><span class="num">08</span></div>
     </div>
     <div class="beat-card reveal" data-genre="reggaeton">
-      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Enredo Beat"
+      <iframe scrolling="no" frameborder="no" allow="autoplay" loading="lazy" title="Enredo Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/enredo-beat-canelo-flash&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
       <div class="meta"><p>Enredo Beat<span class="genre-tag">Reggaetón</span></p><span class="num">09</span></div>
     </div>
     <div class="beat-card reveal" data-genre="hiphop">
-      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Acertijo Beat"
+      <iframe scrolling="no" frameborder="no" allow="autoplay" loading="lazy" title="Acertijo Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/acertijo-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
       <div class="meta"><p>Acertijo Beat<span class="genre-tag">Hip-hop</span></p><span class="num">10</span></div>
     </div>
@@ -505,12 +649,71 @@
 
 </main>
 
+<a href="https://www.beatstars.com/caneloflashbeats" target="_blank" rel="noopener" class="floating-cta btn btn-primary" id="floatingCta">
+  <svg viewBox="0 0 24 24"><path d="M13 2 L4 14 H11 L9 22 L20 9 H12 L13 2Z"/></svg>
+  Shop on BeatStars
+  <span class="shine"></span>
+</a>
+
 <footer class="site-footer">
   <img src="logo.png" alt="Canelo Flash logo">
   <span>© 2026 Canelo Flash. All beats available on BeatStars.</span>
 </footer>
 
 <script>
+  // floating CTA on scroll
+  (function(){
+    const cta = document.getElementById('floatingCta');
+    if(!cta) return;
+    let ticking = false;
+    function checkScroll(){
+      const showAfter = window.innerHeight * 0.9;
+      if(window.scrollY > showAfter){ cta.classList.add('show'); }
+      else{ cta.classList.remove('show'); }
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if(!ticking){ requestAnimationFrame(checkScroll); ticking = true; }
+    });
+    checkScroll();
+  })();
+
+  // mobile menu
+  (function(){
+    const btn = document.getElementById('hamburgerBtn');
+    const closeBtn = document.getElementById('mobileCloseBtn');
+    const panel = document.getElementById('mobileNav');
+    const overlay = document.getElementById('mobileOverlay');
+    if(!btn || !panel) return;
+
+    function openMenu(){
+      panel.classList.add('open');
+      overlay.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+    function closeMenu(){
+      panel.classList.remove('open');
+      overlay.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    btn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    panel.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const filter = link.dataset.filter;
+        if(filter){
+          e.preventDefault();
+          const targetPill = document.querySelector('.filter-pill[data-filter="'+filter+'"]');
+          if(targetPill) targetPill.click();
+          document.getElementById('beats').scrollIntoView({behavior:'smooth'});
+        }
+        closeMenu();
+      });
+    });
+  })();
+
   // genres dropdown in nav
   (function(){
     const dropdown = document.querySelector('.nav-dropdown');
