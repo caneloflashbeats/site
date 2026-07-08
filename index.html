@@ -297,6 +297,17 @@
     .about-grid{grid-template-columns:1fr; gap:34px;}
     .about-photo-wrap{max-width:240px; margin:0 auto;}
   }
+
+  .free-card{
+    background:linear-gradient(135deg, rgba(232,35,43,0.08), rgba(212,175,55,0.04));
+    border:1px solid var(--gold-dim); border-radius:14px;
+    padding:44px 6vw; text-align:center;
+  }
+  .free-text{max-width:600px; margin:0 auto;}
+  .free-body{color:var(--gray); font-size:14px; line-height:1.7; margin:14px 0 28px;}
+  .free-actions{display:flex; flex-direction:column; align-items:center; gap:20px;}
+  .free-actions audio{width:100%; max-width:420px; accent-color:var(--red);}
+  .free-terms{font-size:11px; color:var(--gray); margin-top:22px; line-height:1.6; opacity:0.8;}
   .beat-card{
     background:var(--bg-2); border:1px solid var(--line); border-radius:8px; overflow:hidden;
     transition:border-color .2s, transform .2s;
@@ -521,6 +532,27 @@
       <p class="eyebrow">Who's behind it</p>
       <h2>Colombian born. <span class="tag">Sound obsessed.</span></h2>
       <p class="about-body">I'm 27. Grew up in Bogotá, spent five years in New York, and music followed me through all of it. I make beats because I genuinely enjoy the process, not because I'm chasing a trend. Trap, reggaetón, hip-hop, boom bap — whatever sound I'm into that week is what comes out.</p>
+    </div>
+  </div>
+</section>
+
+<section id="free">
+  <div class="free-card reveal">
+    <div class="free-text">
+      <p class="eyebrow">On the house</p>
+      <h2>One beat, <span class="tag">free.</span> No catch.</h2>
+      <p class="free-body">A track made just for people who find this page. Tagged MP3, free to use for non-profit work. Want the clean WAV version? That's on BeatStars.</p>
+      <div class="free-actions">
+        <audio controls preload="none" src="free-beat.mp3">
+          Your browser doesn't support the audio element.
+        </audio>
+        <a class="btn btn-primary" href="free-beat.mp3" download>
+          <svg viewBox="0 0 24 24"><path d="M13 2 L4 14 H11 L9 22 L20 9 H12 L13 2Z"/></svg>
+          Download free beat
+          <span class="shine"></span>
+        </a>
+      </div>
+      <p class="free-terms">Free for non-profit use only. Credit "prod. by Canelo Flash" if you use it. For commercial or monetized use, grab a license on BeatStars.</p>
     </div>
   </div>
 </section>
