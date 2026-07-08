@@ -219,6 +219,22 @@
   .section-intro{max-width:520px; color:var(--gray); font-size:14px; line-height:1.7; margin-bottom:50px;}
 
   /* BEATS grid: 3 across, stacked in rows */
+  .filter-row{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px;}
+  .filter-pill{
+    background:transparent; border:1px solid var(--line); color:var(--gray);
+    padding:9px 20px; border-radius:100px; font-family:Arial, Helvetica, sans-serif;
+    font-size:12px; font-weight:bold; letter-spacing:1px; text-transform:uppercase;
+    cursor:pointer; transition:all .2s ease;
+  }
+  .filter-pill:hover{border-color:var(--gold-dim); color:var(--bone);}
+  .filter-pill.active{background:var(--red); border-color:var(--red); color:var(--bone);}
+  .beat-card{transition:border-color .2s, transform .2s, opacity .3s, display .3s;}
+  .beat-card.hidden{display:none;}
+  .genre-tag{
+    display:block; font-size:10px; letter-spacing:1.5px; color:var(--gold);
+    text-transform:uppercase; font-weight:bold; margin-top:3px;
+  }
+
   .beats-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
   .beat-card{
     background:var(--bg-2); border:1px solid var(--line); border-radius:8px; overflow:hidden;
@@ -334,46 +350,64 @@
   <h2 class="reveal">Fresh off the <span class="tag">block.</span></h2>
   <p class="section-intro reveal">A taste of what's waiting on BeatStars. Non-exclusive and exclusive licenses, instant delivery, no middleman.</p>
 
+  <div class="filter-row reveal" role="group" aria-label="Filter beats by genre">
+    <button class="filter-pill active" data-filter="all">All</button>
+    <button class="filter-pill" data-filter="trap">Trap</button>
+    <button class="filter-pill" data-filter="reggaeton">Reggaetón</button>
+    <button class="filter-pill" data-filter="hiphop">Hip-hop</button>
+    <button class="filter-pill" data-filter="afrobeat">Afrobeat</button>
+  </div>
+
   <div class="beats-grid">
-    <div class="beat-card reveal">
+    <div class="beat-card reveal" data-genre="hiphop">
       <iframe scrolling="no" frameborder="no" allow="autoplay" title="Muffin Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/muffin-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
-      <div class="meta"><p>Muffin Beat</p><span class="num">01</span></div>
+      <div class="meta"><p>Muffin Beat<span class="genre-tag">Hip-hop</span></p><span class="num">01</span></div>
     </div>
-    <div class="beat-card reveal">
+    <div class="beat-card reveal" data-genre="afrobeat">
       <iframe scrolling="no" frameborder="no" allow="autoplay" title="De Playita"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/de-playita&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
-      <div class="meta"><p>De Playita</p><span class="num">02</span></div>
+      <div class="meta"><p>De Playita<span class="genre-tag">Afrobeat</span></p><span class="num">02</span></div>
     </div>
-    <div class="beat-card reveal">
+    <div class="beat-card reveal" data-genre="trap">
       <iframe scrolling="no" frameborder="no" allow="autoplay" title="1999 Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/1999-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
-      <div class="meta"><p>1999 Beat</p><span class="num">03</span></div>
+      <div class="meta"><p>1999 Beat<span class="genre-tag">Trap</span></p><span class="num">03</span></div>
     </div>
-    <div class="beat-card reveal">
+    <div class="beat-card reveal" data-genre="hiphop">
       <iframe scrolling="no" frameborder="no" allow="autoplay" title="Kintsugi Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/kintsugi-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
-      <div class="meta"><p>Kintsugi Beat</p><span class="num">04</span></div>
+      <div class="meta"><p>Kintsugi Beat<span class="genre-tag">Hip-hop</span></p><span class="num">04</span></div>
     </div>
-    <div class="beat-card reveal">
+    <div class="beat-card reveal" data-genre="reggaeton">
       <iframe scrolling="no" frameborder="no" allow="autoplay" title="Demencia Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/demenciabeat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
-      <div class="meta"><p>Demencia Beat</p><span class="num">05</span></div>
+      <div class="meta"><p>Demencia Beat<span class="genre-tag">Reggaetón</span></p><span class="num">05</span></div>
     </div>
-    <div class="beat-card reveal">
+    <div class="beat-card reveal" data-genre="hiphop">
       <iframe scrolling="no" frameborder="no" allow="autoplay" title="Intrépido Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/intrepido-beat-canelo-flash&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
-      <div class="meta"><p>Intrépido Beat</p><span class="num">06</span></div>
+      <div class="meta"><p>Intrépido Beat<span class="genre-tag">Hip-hop</span></p><span class="num">06</span></div>
     </div>
-    <div class="beat-card reveal">
+    <div class="beat-card reveal" data-genre="reggaeton">
       <iframe scrolling="no" frameborder="no" allow="autoplay" title="Nostalgia Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/nostalgia-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
-      <div class="meta"><p>Nostalgia Beat</p><span class="num">07</span></div>
+      <div class="meta"><p>Nostalgia Beat<span class="genre-tag">Reggaetón</span></p><span class="num">07</span></div>
     </div>
-    <div class="beat-card reveal">
+    <div class="beat-card reveal" data-genre="trap">
       <iframe scrolling="no" frameborder="no" allow="autoplay" title="Kao Beat"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/kao-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
-      <div class="meta"><p>Kao Beat</p><span class="num">08</span></div>
+      <div class="meta"><p>Kao Beat<span class="genre-tag">Trap</span></p><span class="num">08</span></div>
+    </div>
+    <div class="beat-card reveal" data-genre="reggaeton">
+      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Enredo Beat"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/enredo-beat-canelo-flash&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
+      <div class="meta"><p>Enredo Beat<span class="genre-tag">Reggaetón</span></p><span class="num">09</span></div>
+    </div>
+    <div class="beat-card reveal" data-genre="hiphop">
+      <iframe scrolling="no" frameborder="no" allow="autoplay" title="Acertijo Beat"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/canelo-flash/acertijo-beat&color=%23E8232B&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true"></iframe>
+      <div class="meta"><p>Acertijo Beat<span class="genre-tag">Hip-hop</span></p><span class="num">10</span></div>
     </div>
   </div>
 </section>
@@ -453,6 +487,26 @@
 </footer>
 
 <script>
+  // genre filter
+  (function(){
+    const pills = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.beat-card');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filter = pill.dataset.filter;
+        cards.forEach(card => {
+          if(filter === 'all' || card.dataset.genre === filter){
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  })();
+
   // spray-paint reveal for the hero logo
   (function(){
     const wrap = document.getElementById('logoWrap');
