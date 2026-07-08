@@ -128,7 +128,25 @@
     background:radial-gradient(circle, rgba(232,35,43,0.10) 0%, rgba(212,175,55,0.05) 35%, transparent 70%);
     z-index:0; pointer-events:none;
   }
-  .logo-wrap{position:relative; display:inline-block; z-index:1;}
+  .lightning-bg{position:absolute; inset:0; overflow:hidden; z-index:0; pointer-events:none;}
+  .lightning-bg img{
+    position:absolute; opacity:0; mix-blend-mode:screen;
+    filter:drop-shadow(0 0 14px rgba(232,35,43,0.6));
+  }
+  .bolt-a{top:10%; left:12%; width:80px; animation:boltFlash 6s ease-in-out infinite;}
+  .bolt-b{top:58%; left:6%; width:50px; animation:boltFlash 7.5s ease-in-out infinite 1.8s;}
+  .bolt-c{top:14%; right:10%; width:64px; animation:boltFlash 5.5s ease-in-out infinite 3.1s;}
+  .bolt-d{top:62%; right:14%; width:42px; animation:boltFlash 8s ease-in-out infinite 4.4s;}
+  .bolt-e{top:38%; left:48%; width:36px; animation:boltFlash 6.8s ease-in-out infinite 2.4s;}
+  @keyframes boltFlash{
+    0%, 92%, 100%{opacity:0; transform:scale(0.9);}
+    94%{opacity:0.9; transform:scale(1.05);}
+    96%{opacity:0.25; transform:scale(1);}
+    98%{opacity:0.8; transform:scale(1.02);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .lightning-bg{display:none;}
+  }
   .hero img.logo{
     width:min(400px, 66vw); position:relative; z-index:1;
     filter:drop-shadow(0 0 40px rgba(212,175,55,0.15)) blur(6px);
@@ -161,16 +179,28 @@
   }
   .cta-row{display:flex; gap:16px; margin-top:36px; flex-wrap:wrap; justify-content:center; position:relative; z-index:1;}
   .btn{
-    display:inline-flex; align-items:center; gap:10px;
-    padding:15px 28px; border-radius:4px; font-weight:bold; font-size:13px;
-    letter-spacing:1px; text-transform:uppercase; transition:transform .15s, box-shadow .15s, background .15s;
+    display:inline-flex; align-items:center; gap:9px;
+    padding:15px 30px 15px 24px; font-weight:bold; font-size:13px;
+    letter-spacing:1px; text-transform:uppercase;
     border:2px solid transparent;
+    position:relative; overflow:hidden;
+    clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
+    transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
   }
-  .btn:hover{transform:translateY(-2px);}
+  .btn svg{width:14px; height:14px; flex-shrink:0;}
+  .btn .shine{
+    position:absolute; top:0; left:-60%; width:35%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+    transform:skewX(-20deg); transition:left .55s ease; pointer-events:none;
+  }
+  .btn:hover{transform:translateY(-2px) scale(1.015); filter:brightness(1.06);}
+  .btn:hover .shine{left:130%;}
   .btn-primary{background:var(--red); color:var(--bone);}
-  .btn-primary:hover{box-shadow:0 10px 26px rgba(232,35,43,0.35);}
-  .btn-ghost{border-color:var(--gold-dim); color:var(--gold);}
-  .btn-ghost:hover{border-color:var(--gold); background:rgba(212,175,55,0.06);}
+  .btn-primary svg{fill:var(--bone);}
+  .btn-primary:hover{box-shadow:0 0 26px rgba(232,35,43,0.55), 0 10px 26px rgba(232,35,43,0.3);}
+  .btn-ghost{border-color:var(--gold-dim); color:var(--gold); background:rgba(212,175,55,0.03);}
+  .btn-ghost svg{fill:var(--gold);}
+  .btn-ghost:hover{border-color:var(--gold); box-shadow:0 0 22px rgba(212,175,55,0.3);}
 
   .scroll-cue{
     position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
@@ -265,16 +295,29 @@
 
 <section class="hero">
   <div class="spray" aria-hidden="true"></div>
+  <div class="lightning-bg" aria-hidden="true">
+    <img class="bolt-a" src="icon.jpg" alt="">
+    <img class="bolt-b" src="icon.jpg" alt="">
+    <img class="bolt-c" src="icon.jpg" alt="">
+    <img class="bolt-d" src="icon.jpg" alt="">
+    <img class="bolt-e" src="icon.jpg" alt="">
+  </div>
   <div class="logo-wrap" id="logoWrap">
     <img class="logo" id="heroLogo" src="logo.png" alt="Canelo Flash — trap, reggaeton, hip-hop and boom bap beats">
   </div>
-  <h1>Beats built <span class="tag">different.</span></h1>
+  <h1>Some people meditate. <span class="tag">I make beats.</span></h1>
   <p class="sub">Trap. Reggaetón. Hip-hop. Boom bap. Pick your lane, grab the license, drop the track.</p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://www.beatstars.com/caneloflashbeats" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M13 2 L4 14 H11 L9 22 L20 9 H12 L13 2Z"/></svg>
       Shop on BeatStars
+      <span class="shine"></span>
     </a>
-    <a class="btn btn-ghost" href="#beats">Hear the catalog</a>
+    <a class="btn btn-ghost" href="#beats">
+      <svg viewBox="0 0 24 24"><path d="M13 2 L4 14 H11 L9 22 L20 9 H12 L13 2Z"/></svg>
+      Hear the catalog
+      <span class="shine"></span>
+    </a>
   </div>
   <span class="scroll-cue">Scroll ↓</span>
 </section>
@@ -338,8 +381,8 @@
 
 <section id="genres">
   <p class="eyebrow reveal">Sound</p>
-  <h2 class="reveal">One producer, <span class="tag">four lanes.</span></h2>
-  <p class="section-intro reveal">Every beat is built to fit the pocket of the genre it's made for — no generic loops recycled across styles.</p>
+  <h2 class="reveal">Trap, reggaetón, hip-hop, <span class="tag">boom bap</span> — depends on the day.</h2>
+  <p class="section-intro reveal">Whatever I'm feeling that day ends up in the beat. That's really the whole process.</p>
   <div class="genre-row reveal">
     <span class="genre-pill">Trap</span>
     <span class="genre-pill">Reggaetón</span>
@@ -353,7 +396,9 @@
   <h2>All killer, <span class="tag">no filler.</span></h2>
   <p>Full catalog, licensing tiers, and instant download live on BeatStars.</p>
   <a class="btn btn-primary" href="https://www.beatstars.com/caneloflashbeats" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M13 2 L4 14 H11 L9 22 L20 9 H12 L13 2Z"/></svg>
     Go to the store
+    <span class="shine"></span>
   </a>
 </section>
 
@@ -387,7 +432,9 @@
       <h2 style="font-size:22px;">Need a <span class="tag">custom beat?</span></h2>
       <p>Reach out directly and let's line up the details.</p>
       <a class="btn btn-primary" href="mailto:caneloflashbeats@gmail.com" style="width:100%; justify-content:center;">
+        <svg viewBox="0 0 24 24"><path d="M13 2 L4 14 H11 L9 22 L20 9 H12 L13 2Z"/></svg>
         caneloflashbeats@gmail.com
+        <span class="shine"></span>
       </a>
     </div>
   </div>
